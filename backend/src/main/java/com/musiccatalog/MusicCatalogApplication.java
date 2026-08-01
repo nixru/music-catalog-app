@@ -1,0 +1,40 @@
+package com.musiccatalog;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@SpringBootApplication
+public class MusicCatalogApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(MusicCatalogApplication.class, args);
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        RestTemplate restTemplate = new RestTemplate();
+
+        // The iTunes Search API responds with Content-Type: text/javascript
+        // (a legacy holdover from JSONP support) instead of application/json.
+        // Spring's Jackson converter refuses to parse unknown content types by
+        // default, so we explicitly allow text/javascript to be treated as JSON.
+        for (HttpMessageConverter<?> converter : restTemplate.getMessageConverters()) {
+            if (converter instanceof MappingJackson2HttpMessageConverter jacksonConverter) {
+                List<MediaType> supportedMediaTypes = new ArrayList<>(jacksonConverter.getSupportedMediaTypes());
+                supportedMediaTypes.add(new MediaType("text", "javascript"));
+                supportedMediaTypes.add(new MediaType("application", "javascript"));
+                jacksonConverter.setSupportedMediaTypes(supportedMediaTypes);
+            }
+        }
+
+        return restTemplate;
+    }
+}

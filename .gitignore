@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+target/
+application.properties
+.classpath
+.factorypath
+.project
+.settings/

@@ -22,7 +22,7 @@ public class User {
     private String username;
 
     @Column
-    private String password; // BCrypt hashed; null for Google-only accounts
+    private String password; 
 
     @Column(nullable = false)
     @Builder.Default

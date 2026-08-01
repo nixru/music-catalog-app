@@ -17,14 +17,14 @@ public class ItunesDtos {
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class ItunesResult {
-        private Long collectionId;   // apple_catalog_id for albums
-        private Long trackId;        // present for songs
+        private Long collectionId;   
+        private Long trackId;        
         private Long artistId;
         private String artistName;
-        private String collectionName; // album title
-        private String trackName;      // song title
+        private String collectionName;
+        private String trackName;    
         private Double collectionPrice;
-        private String releaseDate;    // ISO string, parse to LocalDate
+        private String releaseDate;   
         private Integer trackCount;
         private String primaryGenreName;
         private String artworkUrl100;

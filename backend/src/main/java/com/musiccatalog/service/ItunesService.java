@@ -17,8 +17,8 @@ public class ItunesService {
     private String baseUrl;
 
     /**
-     * Searches the iTunes catalog. We focus on entity=album per project scope,
-     * but "type" is accepted for flexibility (album/song/musicArtist).
+     Searches the iTunes catalog. We focus on entity=album per project scope,
+     but "type" is accepted for flexibility (album/song/musicArtist).
      */
     public ItunesResponse search(String query, String type, int limit) {
         String entity = mapEntity(type);

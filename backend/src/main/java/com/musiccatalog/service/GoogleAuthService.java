@@ -25,12 +25,12 @@ public class GoogleAuthService {
     private String googleClientId;
 
     /**
-     * Verifies a Google ID token by calling Google's tokeninfo endpoint (simplest
-     * approach - no extra SDK dependency needed). Confirms the token's audience
-     * matches our configured OAuth client ID, then finds or creates a local User
-     * record keyed by the verified email, and issues our own JWT so the rest of
-     * the app (JwtAuthFilter, protected endpoints, etc.) doesn't need to know
-     * Google was involved at all.
+     Verifies a Google ID token by calling Google's tokeninfo endpoint (simplest
+     approach - no extra SDK dependency needed). Confirms the token's audience
+     matches our configured OAuth client ID, then finds or creates a local User
+     record keyed by the verified email, and issues our own JWT so the rest of
+     the app (JwtAuthFilter, protected endpoints, etc.) doesn't need to know
+     Google was involved at all.
      */
     public AuthResponse authenticateWithGoogle(String idToken) {
         if (googleClientId == null || googleClientId.isBlank()) {

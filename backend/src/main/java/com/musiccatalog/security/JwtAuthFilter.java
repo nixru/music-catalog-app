@@ -40,8 +40,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         try {
             username = jwtUtil.extractUsername(jwt);
         } catch (Exception e) {
-            // Invalid/expired token - let request continue unauthenticated,
-            // Spring Security will reject it at the authorization stage.
+           
             filterChain.doFilter(request, response);
             return;
         }

@@ -16,18 +16,18 @@ import java.util.Comparator;
 import java.util.Map;
 
 /**
- * AI Feature: Trend summary.
- *
- * Generates a short natural-language paragraph describing patterns in the
- * user's saved library (dominant genres, favorite decades, rating habits,
- * most-collected artists).
- *
- * If `anthropic.api-key` is configured, this calls the Claude API for a
- * genuinely LLM-generated summary. Without a key, it falls back to a
- * deterministic rule-based summary built from the same stats - so the
- * feature works out of the box with zero external dependencies, and can be
- * upgraded to a live LLM call by just adding a key. The response tells the
- * frontend which path was used via the "source" field, for transparency.
+ AI Feature: Trend summary.
+ 
+ Generates a short natural-language paragraph describing patterns in the
+ user's saved library (dominant genres, favorite decades, rating habits,
+ most-collected artists).
+ 
+ If `anthropic.api-key` is configured, this calls the Claude API for a
+ genuinely LLM-generated summary. Without a key, it falls back to a
+ deterministic rule-based summary built from the same stats - so the
+ feature works out of the box with zero external dependencies, and can be
+ upgraded to a live LLM call by just adding a key. The response tells the
+ frontend which path was used via the "source" field, for transparency.
  */
 @Service
 @RequiredArgsConstructor
@@ -104,8 +104,8 @@ public class InsightsService {
     }
 
     /**
-     * Deterministic, template-based summary built directly from the same
-     * aggregate stats used for the charts - no external dependency required.
+     Deterministic, template-based summary built directly from the same
+     aggregate stats used for the charts - no external dependency required.
      */
     private String buildRuleBasedSummary(LibraryStats stats) {
         StringBuilder sb = new StringBuilder();

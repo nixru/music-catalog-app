@@ -24,12 +24,12 @@ public class LibraryItem {
     private Long appleCatalogId;
 
     @Column(nullable = false)
-    private String title; // collectionName (album title)
+    private String title; 
 
     @Column(name = "artist_name", nullable = false)
     private String artistName;
 
-    private String genre; // primaryGenreName
+    private String genre; 
 
     @Column(name = "release_date")
     private LocalDate releaseDate;
@@ -41,7 +41,7 @@ public class LibraryItem {
     private String artworkUrl;
 
     @Column(name = "user_rating")
-    private Integer userRating; // 1-5, nullable
+    private Integer userRating; 
 
     @Column(name = "user_notes", length = 2000)
     private String userNotes;

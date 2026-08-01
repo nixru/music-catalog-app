@@ -13,7 +13,7 @@ public class SearchController {
 
     private final ItunesService itunesService;
 
-    // GET /api/search?query=coldplay&type=album&limit=25
+    // GET /api/search?query=abc&type=album&limit=25
     @GetMapping
     public ResponseEntity<ItunesResponse> search(
             @RequestParam String query,

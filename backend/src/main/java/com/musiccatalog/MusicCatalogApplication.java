@@ -22,10 +22,6 @@ public class MusicCatalogApplication {
     public RestTemplate restTemplate() {
         RestTemplate restTemplate = new RestTemplate();
 
-        // The iTunes Search API responds with Content-Type: text/javascript
-        // (a legacy holdover from JSONP support) instead of application/json.
-        // Spring's Jackson converter refuses to parse unknown content types by
-        // default, so we explicitly allow text/javascript to be treated as JSON.
         for (HttpMessageConverter<?> converter : restTemplate.getMessageConverters()) {
             if (converter instanceof MappingJackson2HttpMessageConverter jacksonConverter) {
                 List<MediaType> supportedMediaTypes = new ArrayList<>(jacksonConverter.getSupportedMediaTypes());

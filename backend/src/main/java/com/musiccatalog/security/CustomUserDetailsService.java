@@ -17,12 +17,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
 
-        // Google-only accounts have no local password. Use a bcrypt-formatted
-        // placeholder that can never match any real input, so a local login
-        // attempt fails cleanly (401) instead of throwing on a null/invalid hash.
         String passwordHash = user.getPassword() != null
                 ? user.getPassword()
-                : "$2a$10$" + "x".repeat(53); // valid-looking bcrypt shape, unmatchable
+                : "$2a$10$" + "x".repeat(53); 
 
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getUsername())

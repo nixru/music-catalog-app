@@ -9,11 +9,19 @@ export default function Register() {
   const { register, loading, error } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log("Submit clicked");
+    console.log(username);
+    console.log(password);
+
     const ok = await register(username, password);
-    if (ok) navigate('/library');
-  };
+
+    console.log("register() returned:", ok);
+
+    if (ok) navigate("/library");
+};
 
   return (
     <div className="max-w-sm mx-auto mt-20 px-6">

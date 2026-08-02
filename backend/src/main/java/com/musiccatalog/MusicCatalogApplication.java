@@ -1,5 +1,7 @@
 package com.musiccatalog;
 
+import jakarta.persistence.EntityManagerFactory;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -32,5 +34,15 @@ public class MusicCatalogApplication {
         }
 
         return restTemplate;
+    }
+
+    @Bean
+    CommandLineRunner checkEntities(EntityManagerFactory emf) {
+        return args -> {
+            System.out.println("========== ENTITIES ==========");
+            emf.getMetamodel().getEntities()
+                    .forEach(e -> System.out.println(e.getName()));
+            System.out.println("==============================");
+        };
     }
 }

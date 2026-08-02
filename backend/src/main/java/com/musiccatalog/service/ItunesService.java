@@ -13,7 +13,7 @@ public class ItunesService {
 
     private final RestTemplate restTemplate;
 
-    @Value("${itunes.base-url}")
+    @Value("${itunes.base-url:https://itunes.apple.com}")
     private String baseUrl;
 
     /**

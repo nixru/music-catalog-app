@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -30,9 +31,12 @@ public class MusicCatalogApplication {
 
         for (HttpMessageConverter<?> converter : restTemplate.getMessageConverters()) {
             if (converter instanceof MappingJackson2HttpMessageConverter jacksonConverter) {
-                List<MediaType> supportedMediaTypes = new ArrayList<>(jacksonConverter.getSupportedMediaTypes());
+                List<MediaType> supportedMediaTypes =
+                        new ArrayList<>(jacksonConverter.getSupportedMediaTypes());
+
                 supportedMediaTypes.add(new MediaType("text", "javascript"));
                 supportedMediaTypes.add(new MediaType("application", "javascript"));
+
                 jacksonConverter.setSupportedMediaTypes(supportedMediaTypes);
             }
         }
@@ -44,8 +48,21 @@ public class MusicCatalogApplication {
     CommandLineRunner checkEntities(EntityManagerFactory emf) {
         return args -> {
             System.out.println("========== ENTITIES ==========");
-            emf.getMetamodel().getEntities()
+            emf.getMetamodel()
+                    .getEntities()
                     .forEach(entity -> System.out.println(entity.getName()));
+            System.out.println("==============================");
+        };
+    }
+
+    @Bean
+    CommandLineRunner showJpaSettings(Environment env) {
+        return args -> {
+            System.out.println("========== JPA SETTINGS ==========");
+            System.out.println("ddl-auto = "
+                    + env.getProperty("spring.jpa.hibernate.ddl-auto"));
+            System.out.println("generate-ddl = "
+                    + env.getProperty("spring.jpa.generate-ddl"));
             System.out.println("==============================");
         };
     }
